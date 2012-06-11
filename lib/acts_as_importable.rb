@@ -69,7 +69,7 @@ module Acts
         else
           new_models = [self.to_model]
         end
-        new_models.tap do |nm|
+        new_models.each do |nm|
           nm.tap do |new_model|
             if new_model
               new_model.legacy_id     = self.id         if new_model.respond_to?(:"legacy_id=")
