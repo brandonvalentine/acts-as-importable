@@ -13,12 +13,12 @@ Gem::Specification.new do |s|
   s.description = %q{Allows you to connect to a second database and systematically transfer those records}
   s.email = %q{joe@joemartinez.name}
   s.extra_rdoc_files = [
-    "README.textile"
+    "README.gemspec"
   ]
   s.files = [
     "Gemfile",
     "Gemfile.lock",
-    "README.textile",
+    "README.gemspec",
     "Rakefile",
     "VERSION",
     "acts-as-importable.gemspec",
