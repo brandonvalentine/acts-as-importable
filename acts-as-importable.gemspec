@@ -5,16 +5,13 @@
 
 Gem::Specification.new do |s|
   s.name = %q{acts-as-importable}
-  s.version = "1.5.2"
+  s.version = "1.5.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Tim Riley", "Joe Martinez"]
   s.date = %q{2011-01-27}
   s.description = %q{Allows you to connect to a second database and systematically transfer those records}
   s.email = %q{joe@joemartinez.name}
-  s.extra_rdoc_files = [
-    "README.gemspec"
-  ]
   s.files = [
     "Gemfile",
     "Gemfile.lock",
