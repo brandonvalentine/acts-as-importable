@@ -25,19 +25,19 @@ module Acts
       end
 
       def import_all
-        self.before_import if self.method_defined? :before_import
+        self.before_import if self.respond_to? :before_import
         new_models = all.collect do |legacy_model|
           legacy_model.import
         end
-        self.after_import(new_models) if self.method_defined? :after_import
+        self.after_import(new_models) if self.respond_to? :after_import
       end
 
       def import_all_in_batches
-        self.before_import if self.method_defined? :before_import
+        self.before_import if self.respond_to? :before_import
         self.find_each do |legacy_model|
           legacy_model.import
         end
-        self.after_import if self.method_defined? :after_import
+        self.after_import if self.respond_to? :after_import
       end
 
       def lookup_class
@@ -63,19 +63,26 @@ module Acts
     module InstanceMethods
 
       def import
-        before_import if self.class.instance_methods.include? :before_import
-        to_model.tap do |new_model|
-          if new_model
-            new_model.legacy_id     = self.id         if new_model.respond_to?(:"legacy_id=")
-            new_model.legacy_class  = self.class.to_s if new_model.respond_to?(:"legacy_class=")
+        before_import if self.respond_to? :before_import
+        if self.respond_to?(:to_models)
+          new_models = self.to_models
+        else
+          new_models = [self.to_model]
+        end
+        new_models.each do |nm|
+          nm.tap do |new_model|
+            if new_model
+              new_model.legacy_id     = self.id         if new_model.respond_to?(:"legacy_id=")
+              new_model.legacy_class  = self.class.to_s if new_model.respond_to?(:"legacy_class=")
 
-            if !new_model.save(:validate => false)
-              p new_model.errors
-              # TODO log an error that the model failed to save
-              # TODO remove the raise once we're out of the development cycle
-              raise
-            else
-              after_import(new_model) if self.class.instance_methods.include? :after_import
+              if !new_model.save(:validate => false)
+                p new_model.errors
+                # TODO log an error that the model failed to save
+                # TODO remove the raise once we're out of the development cycle
+                raise
+              else
+                after_import(new_model) if self.respond_to? :after_import
+              end
             end
           end
         end
