@@ -9,7 +9,8 @@ module Acts
 
       def acts_as_importable(options = {})
         # Store the import target class with the legacy class
-        write_inheritable_attribute :importable_to, options[:to]
+        class_attribute :importable_to
+        self.importable_to = options[:to]
 
         # Don't extend or include twice. This will allow acts_as_importable to be called multiple times.
         # eg. once in a parent class and once again in the child class, where it can override some options.
