@@ -73,7 +73,9 @@ module Acts
         new_models.each do |nm|
           nm.tap do |new_model|
             if new_model
-              new_model.legacy_id     = self.id         if new_model.respond_to?(:"legacy_id=")
+              if new_model.respond_to?(:"legacy_id=")
+                new_model.legacy_id = self.respond_to?(:legacy_id) ? self.legacy_id : self.id
+              end
               new_model.legacy_class  = self.class.to_s if new_model.respond_to?(:"legacy_class=")
 
               if !new_model.save(:validate => false)
