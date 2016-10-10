@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{acts-as-importable}
-  s.version = "1.5.4"
+  s.version = "1.5.5"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Tim Riley", "Joe Martinez"]
@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
     "Rakefile",
     "VERSION",
     "acts-as-importable.gemspec",
-    "init.rb",
+    "rails/init.rb",
     "lib/acts_as_importable.rb",
     "lib/core_extensions.rb",
     "spec/acts_as_importable_spec.rb",
